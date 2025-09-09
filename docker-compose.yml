@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ozon-tracker:
+    build: .
+    container_name: ozon-price-tracker
+    volumes:
+      # Монтируем папку для сохранения результатов
+      - ./data:/app/data
+      - ./charts:/app/charts
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Для интерактивного режима
+    stdin_open: true
+    tty: true
+    # Переопределяем команду для интерактивного режима
+    command: python main.py
